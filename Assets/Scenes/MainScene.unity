@@ -575,8 +575,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c322a024d177b47a629f8e5a4b10e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityManager: {fileID: 1286795572}
   canvasGroup: {fileID: 1221753944}
+  stepNameLabel: {fileID: 0}
+  stepInstructionsLabel: {fileID: 0}
+  stepContentTransform: {fileID: 0}
+  isDone: 0
 --- !u!225 &1221753944
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -620,6 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 0
   entities: []
+  wizardController: {fileID: 1221753943}
   availableMeshes:
   - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
