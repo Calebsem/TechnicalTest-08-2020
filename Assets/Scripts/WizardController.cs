@@ -1,20 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WizardController : MonoBehaviour, IApplicationStateController
 {
+    [Header("Scene")]
     public CanvasGroup canvasGroup;
     public Text stepNameLabel;
     public Text stepInstructionsLabel;
     public Transform stepContentTransform;
-    public bool isDone;
+    public Button nextButton;
+    public Transform meshList;
+
+    [Header("Resources")]
+    public GameObject buttonPrefab;
+
+    [Header("Debug")]
+    public EntityDefinition definition;
 
     private IWizardStep currentStep;
     private Queue<IWizardStep> steps;
-    private EntityManager entityManager;
 
-    public bool Done => isDone;
+    [HideInInspector]
+    public EntityManager entityManager;
+    public bool Done { get; private set; }
 
     private void Awake()
     {
@@ -23,9 +33,11 @@ public class WizardController : MonoBehaviour, IApplicationStateController
 
     public void Begin(EntityManager manager)
     {
+        Done = false;
         entityManager = manager;
-        isDone = false;
+        definition = new EntityDefinition();
         steps = new Queue<IWizardStep>();
+        steps.Enqueue(new WizardSelectMeshStep());
         canvasGroup.alpha = 1;
         ContinueWizard();
     }
@@ -48,7 +60,7 @@ public class WizardController : MonoBehaviour, IApplicationStateController
         }
         else
         {
-            isDone = true;
+            Done = true;
         }
     }
 

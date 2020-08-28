@@ -36,7 +36,7 @@ public class EntityManager : MonoBehaviour
     {
         if (currentController != null && currentController.Done)
         {
-            SwitchState(State);
+            SwitchState(ApplicationState.Idle);
         }
     }
 
@@ -51,7 +51,8 @@ public class EntityManager : MonoBehaviour
         }
         else
         {
-            throw new Exception("Unhandled entity manager state");
+            currentController = null;
+            Debug.LogWarning($"No controller for state {state}");
         }
     }
 }
