@@ -28,8 +28,6 @@ public class EntityManager : MonoBehaviour
         entities = new List<EntityDefinition>();
         controllers = new Dictionary<ApplicationState, IApplicationStateController>();
         controllers.Add(ApplicationState.Wizard, wizardController);
-
-        SwitchState(ApplicationState.Wizard);
     }
 
     private void Update()
@@ -38,6 +36,11 @@ public class EntityManager : MonoBehaviour
         {
             SwitchState(ApplicationState.Idle);
         }
+    }
+
+    public void SwitchState(string name)
+    {
+        SwitchState((ApplicationState)Enum.Parse(typeof(ApplicationState), name));
     }
 
     private void SwitchState(ApplicationState state)

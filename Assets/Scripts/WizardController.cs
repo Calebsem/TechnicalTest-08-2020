@@ -29,6 +29,7 @@ public class WizardController : MonoBehaviour, IApplicationStateController
     private void Awake()
     {
         canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void Begin(EntityManager manager)
@@ -40,6 +41,7 @@ public class WizardController : MonoBehaviour, IApplicationStateController
         steps.Enqueue(new WizardSelectMeshStep());
         steps.Enqueue(new WizardSelectBehavioursStep());
         canvasGroup.alpha = 1;
+        canvasGroup.blocksRaycasts = true;
         ContinueWizard();
     }
 
@@ -67,7 +69,9 @@ public class WizardController : MonoBehaviour, IApplicationStateController
 
     public void End()
     {
+        entityManager.entities.Add(definition);
         canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void Cleanup()
