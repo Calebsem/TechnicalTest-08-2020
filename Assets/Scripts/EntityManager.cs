@@ -15,7 +15,7 @@ public class EntityManager : MonoBehaviour
     public List<Mesh> availableMeshes;
     public GameObject entityPrefab;
 
-    private readonly Type[] availableBehaviours = new Type[]{
+    public Type[] availableBehaviours { get; private set; } = new Type[]{
         typeof(Explode),
         typeof(GivePoints)
     };
