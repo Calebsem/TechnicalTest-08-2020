@@ -10,10 +10,12 @@ public class EntityManager : MonoBehaviour
 
     [Header("Scene")]
     public WizardController wizardController;
+    public EntityPlacementController entityPlacementController;
 
     [Header("Resources")]
     public List<Mesh> availableMeshes;
     public GameObject entityPrefab;
+    public GameObject buttonPrefab;
 
     public Type[] availableBehaviours { get; private set; } = new Type[]{
         typeof(Explode),
@@ -28,6 +30,7 @@ public class EntityManager : MonoBehaviour
         entities = new List<EntityDefinition>();
         controllers = new Dictionary<ApplicationState, IApplicationStateController>();
         controllers.Add(ApplicationState.Wizard, wizardController);
+        controllers.Add(ApplicationState.Placing, entityPlacementController);
     }
 
     private void Update()

@@ -14,9 +14,6 @@ public class WizardController : MonoBehaviour, IApplicationStateController
     public Transform buttonList;
     public InputField nameField;
 
-    [Header("Resources")]
-    public GameObject buttonPrefab;
-
     [Header("Debug")]
     public EntityDefinition definition;
 

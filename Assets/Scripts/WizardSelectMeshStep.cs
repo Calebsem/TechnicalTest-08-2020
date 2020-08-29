@@ -23,7 +23,7 @@ public class WizardSelectMeshStep : IWizardStep
 
         foreach (Mesh mesh in wizardController.entityManager.availableMeshes)
         {
-            GameObject meshBtnObject = GameObject.Instantiate(wizardController.buttonPrefab, wizardController.buttonList);
+            GameObject meshBtnObject = GameObject.Instantiate(wizardController.entityManager.buttonPrefab, wizardController.buttonList);
             meshBtnObject.GetComponentInChildren<Text>().text = mesh.name;
             Button button = meshBtnObject.GetComponent<Button>();
             button.onClick.AddListener(() =>

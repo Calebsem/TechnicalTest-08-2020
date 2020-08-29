@@ -27,7 +27,7 @@ public class WizardSelectBehavioursStep : IWizardStep
 
         foreach (Type type in wizardController.entityManager.availableBehaviours)
         {
-            GameObject meshBtnObject = GameObject.Instantiate(wizardController.buttonPrefab, wizardController.buttonList);
+            GameObject meshBtnObject = GameObject.Instantiate(wizardController.entityManager.buttonPrefab, wizardController.buttonList);
             meshBtnObject.GetComponentInChildren<Text>().text = type.Name;
             Button button = meshBtnObject.GetComponent<Button>();
             button.onClick.AddListener(() =>
