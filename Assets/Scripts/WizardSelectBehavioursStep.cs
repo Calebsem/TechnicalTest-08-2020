@@ -14,6 +14,9 @@ public class WizardSelectBehavioursStep : IWizardStep
     {
         wizardController = controller;
         selectedTypes = new List<Type>();
+        selectedTypes.Add(typeof(MeshFilter));
+        selectedTypes.Add(typeof(MeshRenderer));
+        selectedTypes.Add(typeof(BoxCollider));
 
         wizardController.Cleanup();
 

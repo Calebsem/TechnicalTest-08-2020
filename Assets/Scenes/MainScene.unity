@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.65080994, g: 0.666729, b: 0.7075472, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.05
@@ -1192,7 +1192,7 @@ Transform:
   m_GameObject: {fileID: 907451307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 20, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 544215637}
   m_RootOrder: 0
@@ -1566,6 +1566,7 @@ MonoBehaviour:
   nextButton: {fileID: 1079676819}
   buttonList: {fileID: 1446523441}
   nameField: {fileID: 1950632690}
+  mainMenu: {fileID: 1952238939}
   definition:
     name: 
     mesh: {fileID: 0}
@@ -1708,8 +1709,8 @@ MonoBehaviour:
   availableMeshes:
   - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  entityPrefab: {fileID: 0}
   buttonPrefab: {fileID: 7060500718379484532, guid: dab93dde179e5054781c87831775a3eb, type: 3}
+  defaultEntityMaterial: {fileID: 2100000, guid: 5eebfe5b817b7da41a51ee81402b36d8, type: 2}
 --- !u!4 &1286795573
 Transform:
   m_ObjectHideFlags: 0
@@ -2573,7 +2574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_LocalRotation: {x: 0.40450317, y: 0, z: 0, w: 0.9145366}
-  m_LocalPosition: {x: 0, y: 1.203, z: -4.09}
+  m_LocalPosition: {x: 0, y: 10, z: -17.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2873,9 +2874,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 1803902257}
   buttonList: {fileID: 1293160050}
   mainMenu: {fileID: 1952238939}
-  selectedEntity:
-    name: 
-    mesh: {fileID: 0}
+  camera: {fileID: 1687258584}
   entityManager: {fileID: 0}
 --- !u!1 &1856990542
 GameObject:

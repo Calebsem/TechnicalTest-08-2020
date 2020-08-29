@@ -1,28 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class EntityPlacementController : MonoBehaviour, IApplicationStateController
 {
+    private const int MaxRaycastDistance = 50;
+
     [Header("Scene")]
     public CanvasGroup canvasGroup;
     public Transform buttonList;
     public GameObject mainMenu;
-
-    [Header("Debug")]
-    public EntityDefinition selectedEntity;
+    public new Camera camera;
 
     [HideInInspector]
     public EntityManager entityManager;
     public bool Done { get; private set; }
 
     private Button selectedButton;
+    private EntityDefinition selectedEntity;
 
     private void Awake()
     {
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
+        Input.simulateMouseWithTouches = true;
+        selectedEntity = null;
     }
 
     public void GoBack()
@@ -36,6 +40,7 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
         Cleanup();
         mainMenu.SetActive(false);
         entityManager = manager;
+        selectedEntity = null;
 
         foreach (EntityDefinition entity in entityManager.entities)
         {
@@ -56,6 +61,32 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
 
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
+    }
+
+    private void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)
+                || EventSystem.current.currentSelectedGameObject != null
+                || selectedEntity == null) return;
+
+            if (touch.phase == TouchPhase.Ended)
+            {
+                RaycastHit hit;
+                Ray ray = camera.ScreenPointToRay(touch.position);
+                if (Physics.Raycast(ray, out hit, MaxRaycastDistance, LayerMask.GetMask("Scene")))
+                {
+                    GameObject instance = new GameObject($"{selectedEntity.name}-instance", selectedEntity.behaviours);
+                    instance.transform.SetParent(hit.collider.transform);
+                    instance.transform.position = hit.point + Vector3.up / 2f;
+
+                    instance.GetComponent<MeshFilter>().mesh = selectedEntity.mesh;
+                    instance.GetComponent<MeshRenderer>().material = entityManager.defaultEntityMaterial;
+                }
+            }
+        }
     }
 
     public void End()

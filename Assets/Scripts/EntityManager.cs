@@ -14,8 +14,8 @@ public class EntityManager : MonoBehaviour
 
     [Header("Resources")]
     public List<Mesh> availableMeshes;
-    public GameObject entityPrefab;
     public GameObject buttonPrefab;
+    public Material defaultEntityMaterial;
 
     public Type[] availableBehaviours { get; private set; } = new Type[]{
         typeof(Explode),
