@@ -29,7 +29,7 @@ public class WizardGiveNameStep : IWizardStep
         Done = true;
         if (string.IsNullOrWhiteSpace(wizardController.nameField.text))
         {
-            wizardController.definition.name = $"{wizardController.definition.mesh.name} - {string.Join(" / ", wizardController.definition.behaviours.Skip(3).Select(b => b.Name))}";
+            wizardController.definition.name = $"{wizardController.definition.mesh.name} - {string.Join(" / ", wizardController.definition.behaviours.Skip(4).Select(b => b.Name))}";
         }
         else
         {

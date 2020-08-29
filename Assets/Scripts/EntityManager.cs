@@ -11,6 +11,7 @@ public class EntityManager : MonoBehaviour
     [Header("Scene")]
     public WizardController wizardController;
     public EntityPlacementController entityPlacementController;
+    public TestController testController;
 
     [Header("Resources")]
     public List<Mesh> availableMeshes;
@@ -31,6 +32,7 @@ public class EntityManager : MonoBehaviour
         controllers = new Dictionary<ApplicationState, IApplicationStateController>();
         controllers.Add(ApplicationState.Wizard, wizardController);
         controllers.Add(ApplicationState.Placing, entityPlacementController);
+        controllers.Add(ApplicationState.Testing, testController);
     }
 
     private void Update()

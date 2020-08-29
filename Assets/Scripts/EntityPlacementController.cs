@@ -65,6 +65,7 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
 
     private void Update()
     {
+        if (entityManager == null || entityManager.State != ApplicationState.Placing) return;
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -79,6 +80,9 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
                 if (Physics.Raycast(ray, out hit, MaxRaycastDistance, LayerMask.GetMask("Scene")))
                 {
                     GameObject instance = new GameObject($"{selectedEntity.name}-instance", selectedEntity.behaviours);
+
+                    instance.layer = LayerMask.NameToLayer("Entity");
+
                     instance.transform.SetParent(hit.collider.transform);
                     instance.transform.position = hit.point + Vector3.up / 2f;
 
