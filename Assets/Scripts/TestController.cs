@@ -18,12 +18,14 @@ public class TestController : MonoBehaviour, IApplicationStateController
     public bool Done { get; private set; }
 
     private readonly List<GameObject> activatedEntities = new List<GameObject>();
+    private GameObject sceneContainer;
 
     private void Awake()
     {
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
         Input.simulateMouseWithTouches = true;
+        sceneContainer = GameObject.FindGameObjectWithTag("Scene");
     }
 
     public void GoBack()
@@ -38,6 +40,7 @@ public class TestController : MonoBehaviour, IApplicationStateController
         entityManager = manager;
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
+        sceneContainer.BroadcastMessage("Init", SendMessageOptions.DontRequireReceiver);
     }
 
     private void Update()
