@@ -19,6 +19,7 @@ public class WizardSelectMeshStep : IWizardStep
 
         wizardController.nextButton.onClick.AddListener(ClickNext);
         wizardController.nextButton.interactable = false;
+        wizardController.nextButton.GetComponentInChildren<Text>().text = "Continue Wizard";
 
         foreach (Mesh mesh in wizardController.entityManager.availableMeshes)
         {

@@ -12,6 +12,7 @@ public class WizardController : MonoBehaviour, IApplicationStateController
     public Transform stepContentTransform;
     public Button nextButton;
     public Transform buttonList;
+    public InputField nameField;
 
     [Header("Resources")]
     public GameObject buttonPrefab;
@@ -40,6 +41,7 @@ public class WizardController : MonoBehaviour, IApplicationStateController
         steps = new Queue<IWizardStep>();
         steps.Enqueue(new WizardSelectMeshStep());
         steps.Enqueue(new WizardSelectBehavioursStep());
+        steps.Enqueue(new WizardGiveNameStep());
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         ContinueWizard();
@@ -80,6 +82,7 @@ public class WizardController : MonoBehaviour, IApplicationStateController
         {
             Destroy(child.gameObject);
         }
+        nameField.text = "";
         nextButton.onClick.RemoveAllListeners();
     }
 }

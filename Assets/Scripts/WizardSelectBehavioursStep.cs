@@ -23,6 +23,7 @@ public class WizardSelectBehavioursStep : IWizardStep
         wizardController.nextButton.onClick.RemoveAllListeners();
         wizardController.nextButton.onClick.AddListener(ClickNext);
         wizardController.nextButton.interactable = true;
+        wizardController.nextButton.GetComponentInChildren<Text>().text = "Continue Wizard";
 
         foreach (Type type in wizardController.entityManager.availableBehaviours)
         {
