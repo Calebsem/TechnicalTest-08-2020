@@ -56,7 +56,7 @@ public class TestController : MonoBehaviour, IApplicationStateController
                 Ray ray = entityManager.camera.ScreenPointToRay(touch.position);
                 if (Physics.Raycast(ray, out hit, EntityManager.MaxRaycastDistance, LayerMask.GetMask("Entity")))
                 {
-                    hit.collider.SendMessage("Apply", SendMessageOptions.DontRequireReceiver);
+                    hit.collider.SendMessage("Apply", this, SendMessageOptions.DontRequireReceiver);
                     activatedEntities.Add(hit.collider.gameObject);
                 }
             }

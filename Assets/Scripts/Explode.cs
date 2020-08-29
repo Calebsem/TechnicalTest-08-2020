@@ -6,7 +6,7 @@ public class Explode : MonoBehaviour
     private Coroutine explosionCoroutine;
     private bool exploded = false;
 
-    private void Apply()
+    private void Apply(object payload)
     {
         if (exploded) return;
         explosionCoroutine = StartCoroutine(ExplodeCoroutine());
