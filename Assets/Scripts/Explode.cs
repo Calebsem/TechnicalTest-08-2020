@@ -8,7 +8,7 @@ public class Explode : MonoBehaviour
     private Vector3 originalPosition;
     private MeshRenderer meshRenderer;
 
-    private void Awake()
+    private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material.color = Color.green;

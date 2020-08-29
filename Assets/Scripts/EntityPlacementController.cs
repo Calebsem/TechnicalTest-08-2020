@@ -10,10 +10,9 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
     public CanvasGroup canvasGroup;
     public Transform buttonList;
 
-    [HideInInspector]
-    public EntityManager entityManager;
     public bool Done { get; private set; }
 
+    private EntityManager entityManager;
     private Button selectedButton;
     private EntityDefinition selectedEntity;
 
@@ -83,6 +82,8 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
 
                     instance.GetComponent<MeshFilter>().mesh = selectedEntity.mesh;
                     instance.GetComponent<MeshRenderer>().material = entityManager.defaultEntityMaterial;
+
+                    entityManager.instances.Add(instance);
                 }
             }
         }

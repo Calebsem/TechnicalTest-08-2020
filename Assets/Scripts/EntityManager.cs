@@ -9,6 +9,7 @@ public class EntityManager : MonoBehaviour
     [Header("Application")]
     public ApplicationState State = ApplicationState.Wizard;
     public List<EntityDefinition> entities;
+    public List<GameObject> instances;
 
     [Header("Scene")]
     public MainMenuController mainMenuController;
@@ -33,6 +34,7 @@ public class EntityManager : MonoBehaviour
     private void Awake()
     {
         entities = new List<EntityDefinition>();
+        instances = new List<GameObject>();
         controllers = new Dictionary<ApplicationState, IApplicationStateController>();
         controllers.Add(ApplicationState.MainMenu, mainMenuController);
         controllers.Add(ApplicationState.Wizard, wizardController);

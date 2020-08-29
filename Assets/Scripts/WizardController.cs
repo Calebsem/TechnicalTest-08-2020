@@ -19,6 +19,7 @@ public class WizardController : MonoBehaviour, IApplicationStateController
 
     private IWizardStep currentStep;
     private Queue<IWizardStep> steps;
+    private bool canceled = false;
 
     [HideInInspector]
     public EntityManager entityManager;
@@ -30,9 +31,16 @@ public class WizardController : MonoBehaviour, IApplicationStateController
         canvasGroup.blocksRaycasts = false;
     }
 
+    public void GoBack()
+    {
+        canceled = true;
+        Done = true;
+    }
+
     public void Begin(EntityManager manager)
     {
         Done = false;
+        canceled = false;
         entityManager = manager;
         definition = new EntityDefinition();
         steps = new Queue<IWizardStep>();
@@ -68,7 +76,10 @@ public class WizardController : MonoBehaviour, IApplicationStateController
 
     public void End()
     {
-        entityManager.entities.Add(definition);
+        if (!canceled)
+        {
+            entityManager.entities.Add(definition);
+        }
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
     }
