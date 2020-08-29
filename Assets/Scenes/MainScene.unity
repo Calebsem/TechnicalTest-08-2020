@@ -2563,6 +2563,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 1599688045}
   mainMenu: {fileID: 1952238939}
   pointsLabel: {fileID: 771856699}
+  camera: {fileID: 1687258584}
   points: 0
   entityManager: {fileID: 0}
 --- !u!1 &1663624671

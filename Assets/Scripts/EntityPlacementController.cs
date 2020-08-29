@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class EntityPlacementController : MonoBehaviour, IApplicationStateController
 {
-    private const int MaxRaycastDistance = 50;
-
     [Header("Scene")]
     public CanvasGroup canvasGroup;
     public Transform buttonList;
@@ -77,7 +75,7 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
             {
                 RaycastHit hit;
                 Ray ray = camera.ScreenPointToRay(touch.position);
-                if (Physics.Raycast(ray, out hit, MaxRaycastDistance, LayerMask.GetMask("Scene")))
+                if (Physics.Raycast(ray, out hit, EntityManager.MaxRaycastDistance, LayerMask.GetMask("Scene")))
                 {
                     GameObject instance = new GameObject($"{selectedEntity.name}-instance", selectedEntity.behaviours);
 

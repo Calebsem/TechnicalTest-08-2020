@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EntityManager : MonoBehaviour
 {
+    public const int MaxRaycastDistance = 50;
+
     [Header("Application")]
     public ApplicationState State = ApplicationState.Wizard;
     public List<EntityDefinition> entities;
