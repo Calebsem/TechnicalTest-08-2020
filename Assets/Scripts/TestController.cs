@@ -8,9 +8,7 @@ public class TestController : MonoBehaviour, IApplicationStateController
 {
     [Header("Scene")]
     public CanvasGroup canvasGroup;
-    public GameObject mainMenu;
     public Text pointsLabel;
-    public new Camera camera;
 
     [Header("Level")]
     public int points;
@@ -35,8 +33,8 @@ public class TestController : MonoBehaviour, IApplicationStateController
 
     public void Begin(EntityManager manager)
     {
+        Done = false;
         Cleanup();
-        mainMenu.SetActive(false);
         entityManager = manager;
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
@@ -55,10 +53,11 @@ public class TestController : MonoBehaviour, IApplicationStateController
             if (touch.phase == TouchPhase.Began)
             {
                 RaycastHit hit;
-                Ray ray = camera.ScreenPointToRay(touch.position);
+                Ray ray = entityManager.camera.ScreenPointToRay(touch.position);
                 if (Physics.Raycast(ray, out hit, EntityManager.MaxRaycastDistance, LayerMask.GetMask("Entity")))
                 {
                     hit.collider.SendMessage("Apply", SendMessageOptions.DontRequireReceiver);
+                    activatedEntities.Add(hit.collider.gameObject);
                 }
             }
         }
@@ -67,13 +66,16 @@ public class TestController : MonoBehaviour, IApplicationStateController
     public void End()
     {
         Cleanup();
-        mainMenu.SetActive(true);
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
     }
 
     private void Cleanup()
     {
+        foreach (GameObject entity in activatedEntities)
+        {
+            entity.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
+        }
         activatedEntities.Clear();
         points = 0;
     }

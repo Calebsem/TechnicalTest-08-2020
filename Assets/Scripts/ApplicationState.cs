@@ -1,6 +1,6 @@
 public enum ApplicationState
 {
-    Idle,
+    MainMenu,
     Wizard,
     Placing,
     Testing

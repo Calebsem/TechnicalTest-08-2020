@@ -9,8 +9,6 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
     [Header("Scene")]
     public CanvasGroup canvasGroup;
     public Transform buttonList;
-    public GameObject mainMenu;
-    public new Camera camera;
 
     [HideInInspector]
     public EntityManager entityManager;
@@ -36,7 +34,6 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
     {
         Done = false;
         Cleanup();
-        mainMenu.SetActive(false);
         entityManager = manager;
         selectedEntity = null;
 
@@ -74,7 +71,7 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
             if (touch.phase == TouchPhase.Ended)
             {
                 RaycastHit hit;
-                Ray ray = camera.ScreenPointToRay(touch.position);
+                Ray ray = entityManager.camera.ScreenPointToRay(touch.position);
                 if (Physics.Raycast(ray, out hit, EntityManager.MaxRaycastDistance, LayerMask.GetMask("Scene")))
                 {
                     GameObject instance = new GameObject($"{selectedEntity.name}-instance", selectedEntity.behaviours);
@@ -94,7 +91,6 @@ public class EntityPlacementController : MonoBehaviour, IApplicationStateControl
     public void End()
     {
         Cleanup();
-        mainMenu.SetActive(true);
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
     }

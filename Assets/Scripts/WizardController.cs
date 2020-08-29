@@ -13,7 +13,6 @@ public class WizardController : MonoBehaviour, IApplicationStateController
     public Button nextButton;
     public Transform buttonList;
     public InputField nameField;
-    public GameObject mainMenu;
 
     [Header("Debug")]
     public EntityDefinition definition;
@@ -42,7 +41,6 @@ public class WizardController : MonoBehaviour, IApplicationStateController
         steps.Enqueue(new WizardGiveNameStep());
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
-        mainMenu.SetActive(false);
         ContinueWizard();
     }
 
@@ -73,7 +71,6 @@ public class WizardController : MonoBehaviour, IApplicationStateController
         entityManager.entities.Add(definition);
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
-        mainMenu.SetActive(true);
     }
 
     public void Cleanup()

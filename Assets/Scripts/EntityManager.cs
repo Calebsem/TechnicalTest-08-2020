@@ -11,9 +11,11 @@ public class EntityManager : MonoBehaviour
     public List<EntityDefinition> entities;
 
     [Header("Scene")]
+    public MainMenuController mainMenuController;
     public WizardController wizardController;
     public EntityPlacementController entityPlacementController;
     public TestController testController;
+    public new Camera camera;
 
     [Header("Resources")]
     public List<Mesh> availableMeshes;
@@ -32,16 +34,19 @@ public class EntityManager : MonoBehaviour
     {
         entities = new List<EntityDefinition>();
         controllers = new Dictionary<ApplicationState, IApplicationStateController>();
+        controllers.Add(ApplicationState.MainMenu, mainMenuController);
         controllers.Add(ApplicationState.Wizard, wizardController);
         controllers.Add(ApplicationState.Placing, entityPlacementController);
         controllers.Add(ApplicationState.Testing, testController);
+
+        SwitchState(ApplicationState.MainMenu);
     }
 
     private void Update()
     {
         if (currentController != null && currentController.Done)
         {
-            SwitchState(ApplicationState.Idle);
+            SwitchState(ApplicationState.MainMenu);
         }
     }
 
