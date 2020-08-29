@@ -33,6 +33,8 @@ public class EntityManager : MonoBehaviour
 
     private void Awake()
     {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
         entities = new List<EntityDefinition>();
         instances = new List<GameObject>();
         controllers = new Dictionary<ApplicationState, IApplicationStateController>();
